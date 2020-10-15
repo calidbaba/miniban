@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $USER != "root" ]]; then
-    echo "you must be root"
+    echo "you must be root" 1>&2
     exit
 fi
 

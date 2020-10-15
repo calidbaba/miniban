@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $USER != "root" ]]; then 
-    echo "you must be root"
+    echo "you must be root" 1>&2 
     exit
 fi
 
@@ -21,6 +21,6 @@ if [[ -z $CHECK ]];then
     #update database
     echo "$IPADDR,$(date +%s)" >> miniban.db 
 else
-    echo "$IPADDR is whitelisted"
+    echo "$IPADDR is whitelisted" 1>&2
 fi
 
