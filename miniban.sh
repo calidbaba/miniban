@@ -20,15 +20,12 @@ update(){
         MIN=$((SEC/60))
         if [ $MIN -ge 10 ]; then 
             ./unban.sh $IP
-            echo "feck ye"
+            echo "$IP is unbanned"
         fi
-        sleep 10
     done < miniban.db
-    #sleep 30
 
 }
-#(while true; do update; sleep 30; done;) &
-(while true; do update; done) &
+(while true; do update; sleep 10; done) &
 
 #ban greiene 
 journalctl -f -u ssh -n 0 | grep Failed --line-buffered | grep --line-buffered -o '[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | while read IP; do 
@@ -38,7 +35,7 @@ journalctl -f -u ssh -n 0 | grep Failed --line-buffered | grep --line-buffered -
     echo "i have seen $IP ${IPADDR["$IP"]} times" 
     
     if [[ ${IPADDR["$IP"]} > 2 ]];then 
-        echo "$IP er skrt" 
+        echo "$IP is banned" 
         IPADDR["$IP"]=0
         #her legger man inn ban
         ./ban.sh $IP
